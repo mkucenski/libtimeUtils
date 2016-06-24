@@ -22,8 +22,8 @@ using namespace std;
 #include "boost/date_time/local_time/local_time.hpp"
 using namespace boost;
 
-#include "Misc/windowsTypes.h"
-#include "Misc/endianSwitch.h"
+#include "misc/windowsTypes.h"
+#include "misc/endianSwitch.h"
 
 string getLocalDateTimeString(const local_time::local_date_time& ldt, const string& strfmt);
 inline string getDateString(const local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%m/%d/%Y"); };

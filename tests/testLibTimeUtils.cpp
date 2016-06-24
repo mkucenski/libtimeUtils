@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "libTimeUtils/timeUtils.h"
-#include "libTimeUtils/timeZoneCalculator.h"
+#include "libtimeUtils/src/timeUtils.h"
+#include "libtimeUtils/src/timeZoneCalculator.h"
 
 #include <iostream>
 #include <vector>

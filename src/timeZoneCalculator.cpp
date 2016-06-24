@@ -14,7 +14,7 @@
 
 #include "timeZoneCalculator.h"
 
-#include "Misc/debugMsgs.h"
+#include "misc/debugMsgs.h"
 
 timeZoneCalculator::timeZoneCalculator() {
 	try {

@@ -11,4 +11,8 @@ missing
 *.in
 *.a
 *.o
+.deps
+
+#Specific binaries
+tests/testLibTimeUtils
 

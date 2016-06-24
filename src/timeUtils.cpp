@@ -17,7 +17,7 @@
 #include <sstream>
 using namespace std;
 
-#include "Misc/debugMsgs.h"
+#include "misc/debugMsgs.h"
 
 string getLocalDateTimeString(const local_time::local_date_time& ldt, const string& strfmt) {
 	stringstream ss;
