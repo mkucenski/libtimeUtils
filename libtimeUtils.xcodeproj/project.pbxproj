@@ -61,6 +61,20 @@
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
+		9A3479121D296169004CA80C /* README.html */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-o README.html README.md";
+			buildConfigurationList = 9A3479151D296169004CA80C /* Build configuration list for PBXLegacyTarget "README.html" */;
+			buildPhases = (
+			);
+			buildToolPath = /opt/local/bin/multimarkdown;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = README.html;
+			passBuildSettingsInEnvironment = 1;
+			productName = README.html;
+		};
 		9ACA06051D1EE6A3009FDB67 /* libtimeUtils */ = {
 			isa = PBXLegacyTarget;
 			buildArgumentsString = "$(ACTION)";
@@ -83,6 +97,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Matt Kucenski";
 				TargetAttributes = {
+					9A3479121D296169004CA80C = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					9ACA06051D1EE6A3009FDB67 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -100,11 +117,35 @@
 			projectRoot = "";
 			targets = (
 				9ACA06051D1EE6A3009FDB67 /* libtimeUtils */,
+				9A3479121D296169004CA80C /* README.html */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin XCBuildConfiguration section */
+		9A3479131D296169004CA80C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9A3479141D296169004CA80C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9ACA06061D1EE6A3009FDB67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -204,6 +245,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9A3479151D296169004CA80C /* Build configuration list for PBXLegacyTarget "README.html" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A3479131D296169004CA80C /* Debug */,
+				9A3479141D296169004CA80C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9ACA06041D1EE6A3009FDB67 /* Build configuration list for PBXProject "libtimeUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
