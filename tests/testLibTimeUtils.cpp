@@ -29,6 +29,8 @@ int main() {
 	posix_time::ptime t(posix_time::second_clock::universal_time());
 	cout << "Universal Time: " << t << "\n";
 	
+	cout << getFromWindows64(131075852240609767) << endl << endl << endl;
+	
 	cout << getDateTimeString(tzcalc.calculateLocalTime(t)) << "\n";			
 	cout << getDateString(tzcalc.calculateLocalTime(t)) << "\n";			
 	cout << getTimeString(tzcalc.calculateLocalTime(t)) << "\n";
@@ -93,6 +95,6 @@ int main() {
 	cout << tzc2a.createLocalTime(string("2006 ") + "Sep 14 08:08:24.140 ns httpd[11092]:", "%Y %b %d %H:%M:%S%F") << endl;
 	cout << tzc2a.createLocalTime(string("2006 ") + "Sep 14 08:08:24.140", "%Y %b %d %H:%M:%S%F") << endl;
 	cout << tzc2a.getTimeZoneString() << endl;
-	
+
 	return 0;
 }
