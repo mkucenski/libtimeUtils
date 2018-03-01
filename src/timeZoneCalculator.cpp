@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// #define _DEBUG_
+#include "misc/debugMsgs.h"
+#include "misc/errMsgs.h"
+
 #include "timeZoneCalculator.h"
 
 #include "misc/debugMsgs.h"
@@ -22,12 +26,12 @@ timeZoneCalculator::timeZoneCalculator() {
 		if (tz.get()) {
 			m_TZ = tz;
 		} else {
-			DEBUG_ERROR("timeZoneCalculator::timeZoneCalculator() Error creating timezone");
+			ERROR("timeZoneCalculator::timeZoneCalculator() Error creating timezone");
 		}
 	} catch(local_time::bad_offset) {
-		DEBUG_ERROR("timeZoneCalculator::timeZoneCalculator() Bad offset exception");
+		ERROR("timeZoneCalculator::timeZoneCalculator() Bad offset exception");
 	} catch(local_time::bad_adjustment) {
-		DEBUG_ERROR("timeZoneCalculator::timeZoneCalculator() Bad adjustment exception");
+		ERROR("timeZoneCalculator::timeZoneCalculator() Bad adjustment exception");
 	}
 }
 
@@ -47,15 +51,15 @@ int timeZoneCalculator::setTimeZone(string strRegion, string strFilePath) {
 				m_TZ = tz;
 				rv = 0;
 			} else {
-				DEBUG_ERROR("timeZoneCalculator::setTimeZone(Region) Error retrieving time zone for region <" << strRegion << ">.");
+				ERROR("timeZoneCalculator::setTimeZone(Region) Error retrieving time zone for region <" << strRegion << ">.");
 			}
 		} catch(local_time::data_not_accessible) {
-			DEBUG_ERROR("timeZoneCalculator::setTimeZone(Region) File not accessible exception for <" << strFilePath << ">.");
+			ERROR("timeZoneCalculator::setTimeZone(Region) File not accessible exception for <" << strFilePath << ">.");
 		} catch(local_time::bad_field_count) {
-			DEBUG_ERROR("timeZoneCalculator::setTimeZone(Region) Bad field count exception for <" << strFilePath << ">.");
+			ERROR("timeZoneCalculator::setTimeZone(Region) Bad field count exception for <" << strFilePath << ">.");
 		}
 	} else {
-		DEBUG_ERROR("timeZoneCalculator::setTimeZone(Region) Zero length region or file path.");
+		ERROR("timeZoneCalculator::setTimeZone(Region) Zero length region or file path.");
 	}
 	
 	return rv;
@@ -75,15 +79,15 @@ int timeZoneCalculator::setTimeZone(string strPosixTimeZone) {
 				m_TZ = tz;
 				rv = 0;
 			} else {
-				DEBUG_ERROR("timeZoneCalculator::setTimeZone(POSIX) Error creating timezone for <" << strPosixTimeZone << ">");
+				ERROR("timeZoneCalculator::setTimeZone(POSIX) Error creating timezone for <" << strPosixTimeZone << ">");
 			}
 		} catch(local_time::bad_offset) {
-			DEBUG_ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad offset exception for <" << strPosixTimeZone << ">");
+			ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad offset exception for <" << strPosixTimeZone << ">");
 		} catch(local_time::bad_adjustment) {
-			DEBUG_ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad adjustment exception for <" << strPosixTimeZone << ">");
+			ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad adjustment exception for <" << strPosixTimeZone << ">");
 		}
 	} else {
-		DEBUG_ERROR("timeZoneCalculator::setTimeZone(POSIX) Zero length time zone string.");
+		ERROR("timeZoneCalculator::setTimeZone(POSIX) Zero length time zone string.");
 	}
 	
 	return rv;

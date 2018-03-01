@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//#define _DEBUG_
-
 #ifndef _TIMEUTILS_H_
 #define _TIMEUTILS_H_
 
