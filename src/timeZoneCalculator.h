@@ -18,8 +18,8 @@
 #include <string>
 using namespace std;
 
-#include "boost/date_time/local_time/local_time.hpp"
-using namespace boost;
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/local_time/local_time.hpp>
 
 class timeZoneCalculator {
 	public:
@@ -30,23 +30,23 @@ class timeZoneCalculator {
 
 		int setTimeZone(string strPosixTimeZone);			//Select time zone from a POSIX time zone string
 		int setTimeZone(string strRegion, string strFilePath);		//Select time zone by region name from a time zone database
-		local_time::time_zone_ptr getTimeZone() { return m_TZ; };	//Retrieve a copy of the local_time::time_zone_ptr member
+		boost::local_time::time_zone_ptr getTimeZone() { return m_TZ; };	//Retrieve a copy of the local_time::time_zone_ptr member
 		
-		local_time::local_date_time calculateLocalTime(posix_time::ptime pt);	//Calculate local time from a UTC ptime
+		boost::local_time::local_date_time calculateLocalTime(boost::posix_time::ptime pt);	//Calculate local time from a UTC ptime
 											//value based on the loaded time zone.
 											
-		local_time::local_date_time createLocalTime(	gregorian::date d, 		//Create a local_date_time object from local
-								posix_time::time_duration td);	//date and time values that are already in 
+		boost::local_time::local_date_time createLocalTime(	boost::gregorian::date d, 		//Create a local_date_time object from local
+								boost::posix_time::time_duration td);	//date and time values that are already in 
 																										//this time zone.
 																											
-		local_time::local_date_time createLocalTime(	u_int8_t month, //Create a local_date_time object from month,
+		boost::local_time::local_date_time createLocalTime(	u_int8_t month, //Create a local_date_time object from month,
 								u_int8_t day, 	//day, year, hour, min, sec values that are 
 								u_int16_t year, //already in this time zone.
 								u_int8_t hour, 
 								u_int8_t min, 
 								u_int8_t sec);
 																	
-		local_time::local_date_time createLocalTime(string str, string strfmt);	//Create a local_date_time object from a 
+		boost::local_time::local_date_time createLocalTime(string str, string strfmt);	//Create a local_date_time object from a 
 											//date/time string that is already in this 
 											//time zone.
 		
@@ -54,7 +54,7 @@ class timeZoneCalculator {
 						//loaded time zone.
 		
 	private:
-		local_time::time_zone_ptr m_TZ;
+		boost::local_time::time_zone_ptr m_TZ;
 };
 
 #endif /*TIMEZONECALCULATOR_H_*/
