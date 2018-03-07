@@ -29,11 +29,11 @@ timeZoneCalculator::timeZoneCalculator() {
 		} else {
 			ERROR("timeZoneCalculator::timeZoneCalculator() Error creating timezone");
 		}
-	} catch(boost::local_time::bad_offset) {
+	} catch (boost::local_time::bad_offset) {
 		ERROR("timeZoneCalculator::timeZoneCalculator() Bad offset exception");
-	} catch(boost::local_time::bad_adjustment) {
+	} catch (boost::local_time::bad_adjustment) {
 		ERROR("timeZoneCalculator::timeZoneCalculator() Bad adjustment exception");
-	} catch(...) {
+	} catch (...) {
 		ERROR("timeZoneCalculator::timeZoneCalculator() Unknown exception");
 	}
 }
@@ -56,11 +56,11 @@ int timeZoneCalculator::setTimeZone(string strRegion, string strFilePath) {
 			} else {
 				ERROR("timeZoneCalculator::setTimeZone(Region) Error retrieving time zone for region <" << strRegion << ">.");
 			}
-		} catch(boost::local_time::data_not_accessible) {
+		} catch (boost::local_time::data_not_accessible) {
 			ERROR("timeZoneCalculator::setTimeZone(Region) File not accessible exception for <" << strFilePath << ">.");
-		} catch(boost::local_time::bad_field_count) {
+		} catch (boost::local_time::bad_field_count) {
 			ERROR("timeZoneCalculator::setTimeZone(Region) Bad field count exception for <" << strFilePath << ">.");
-		} catch(...) {
+		} catch (...) {
 			ERROR("timeZoneCalculator::setTieZone(Region) Unknown exception");
 		}
 	} else {
@@ -86,11 +86,11 @@ int timeZoneCalculator::setTimeZone(string strPosixTimeZone) {
 			} else {
 				ERROR("timeZoneCalculator::setTimeZone(POSIX) Error creating timezone for <" << strPosixTimeZone << ">");
 			}
-		} catch(boost::local_time::bad_offset) {
+		} catch (boost::local_time::bad_offset) {
 			ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad offset exception for <" << strPosixTimeZone << ">");
-		} catch(boost::local_time::bad_adjustment) {
+		} catch (boost::local_time::bad_adjustment) {
 			ERROR("timeZoneCalculator::setTimeZone(POSIX) Bad adjustment exception for <" << strPosixTimeZone << ">");
-		} catch(...) {
+		} catch (...) {
 			ERROR("timeZoneCalculator::setTimeZone(POSIX) Unknown exception");
 		}
 	} else {
@@ -107,7 +107,7 @@ boost::local_time::local_date_time timeZoneCalculator::calculateLocalTime(boost:
 	try {
 		boost::local_time::local_date_time rv = boost::local_time::local_date_time(pt, m_TZ);
 		return rv;
-	} catch(...) {
+	} catch (...) {
 		ERROR("timeZoneCalculator::calculateLocalTime() Unknown exception");
 	}
 }
@@ -117,43 +117,55 @@ string timeZoneCalculator::getTimeZoneString() {
 
 	try {
 		rv = m_TZ->to_posix_string();
-	} catch(...) {
+	} catch (...) {
 		ERROR("timeZoneCalculator::getTimeZoneString() Unknown exception");
 	}
 
 	return rv;
 }
 
-boost::local_time::local_date_time timeZoneCalculator::createLocalTime(boost::gregorian::date d, boost::posix_time::time_duration td) {
+bool timeZoneCalculator::createLocalTime(boost::gregorian::date d, boost::posix_time::time_duration td, boost::local_time::local_date_time* p_local) {
+	bool rv = false;
+
 	try {
-		boost::local_time::local_date_time rv = boost::local_time::local_date_time(d, td, m_TZ, boost::local_time::local_date_time::NOT_DATE_TIME_ON_ERROR);
-		return rv;
-	} catch(...) {
+		*p_local = boost::local_time::local_date_time(d, td, m_TZ, boost::local_time::local_date_time::NOT_DATE_TIME_ON_ERROR);
+		rv = true;
+	} catch (...) {
 		ERROR("timeZoneCalculator::createLocalTime() Unknown exception");
 	}
+
+	return rv;
 }
 
-boost::local_time::local_date_time timeZoneCalculator::createLocalTime(u_int8_t month, u_int8_t day, u_int16_t year, u_int8_t hour, u_int8_t min, u_int8_t sec) {
+bool timeZoneCalculator::createLocalTime(u_int8_t month, u_int8_t day, u_int16_t year, u_int8_t hour, u_int8_t min, u_int8_t sec, boost::local_time::local_date_time* p_local) {
+	bool rv = false;
+
 	try {
-		boost::local_time::local_date_time rv = createLocalTime(boost::gregorian::date(year, month, day), boost::posix_time::time_duration(hour, min, sec));
-		return rv;
-	} catch(...) {
+		rv = createLocalTime(boost::gregorian::date(year, month, day), boost::posix_time::time_duration(hour, min, sec), p_local);
+	} catch (...) {
 		ERROR("timeZoneCalculator::createLocalTime() Unknown exception");
 	}
+
+	return rv;
 }
 
-boost::local_time::local_date_time timeZoneCalculator::createLocalTime(string str, string strfmt) {
-	boost::local_time::local_date_time ldt(boost::local_time::not_a_date_time, m_TZ);
+bool timeZoneCalculator::createLocalTime(string str, string strfmt, boost::local_time::local_date_time* p_local) {
+	bool rv = false;
 
 	try {
+		boost::local_time::local_date_time ldt(boost::local_time::not_a_date_time, m_TZ);
+
 		stringstream ss;
 		boost::local_time::local_time_input_facet* input_facet = new boost::local_time::local_time_input_facet(strfmt + " %ZP");
 		ss.imbue(locale(ss.getloc(), input_facet));
 		ss << str + " " + getTimeZoneString();
 		ss >> ldt;
-	} catch(...) {
+
+		*p_local = ldt;
+		rv = true;
+	} catch (...) {
 		ERROR("timeZoneCalculator::createLocalTime() Unknown exception");
 	}
 
-	return ldt;
+	return rv;
 }

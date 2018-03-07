@@ -35,18 +35,21 @@ class timeZoneCalculator {
 		boost::local_time::local_date_time calculateLocalTime(boost::posix_time::ptime pt);	//Calculate local time from a UTC ptime
 											//value based on the loaded time zone.
 											
-		boost::local_time::local_date_time createLocalTime(	boost::gregorian::date d, 		//Create a local_date_time object from local
-								boost::posix_time::time_duration td);	//date and time values that are already in 
+		bool createLocalTime(	boost::gregorian::date d, 		//Create a local_date_time object from local
+								boost::posix_time::time_duration td,
+								boost::local_time::local_date_time* p_local);	//date and time values that are already in 
 																										//this time zone.
 																											
-		boost::local_time::local_date_time createLocalTime(	u_int8_t month, //Create a local_date_time object from month,
+		bool createLocalTime(	u_int8_t month, //Create a local_date_time object from month,
 								u_int8_t day, 	//day, year, hour, min, sec values that are 
 								u_int16_t year, //already in this time zone.
 								u_int8_t hour, 
 								u_int8_t min, 
-								u_int8_t sec);
+								u_int8_t sec,
+								boost::local_time::local_date_time* p_local);
 																	
-		boost::local_time::local_date_time createLocalTime(string str, string strfmt);	//Create a local_date_time object from a 
+		bool createLocalTime(string str, string strfmt,
+							 boost::local_time::local_date_time* p_local);	//Create a local_date_time object from a 
 											//date/time string that is already in this 
 											//time zone.
 		
