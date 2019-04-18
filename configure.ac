@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(libtimeUtils, 20160623)
+AC_INIT(libtimeUtils, 20190321)
 AC_CONFIG_SRCDIR([src/timeUtils.h])
 AM_INIT_AUTOMAKE
 AC_PROG_RANLIB

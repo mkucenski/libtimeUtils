@@ -27,7 +27,9 @@ using namespace std;
 string getLocalDateTimeString(const boost::local_time::local_date_time& ldt, const string& strfmt);
 inline string getDateString(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%m/%d/%Y"); };
 inline string getTimeString(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%T"); };
-inline string getDateTimeString(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%a %b %d %Y %T"); };
+inline string getDateTimeString(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%m/%d/%Y %T"); };
+inline string getDateTimeStringAlt(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%a %b %d %Y %T"); };
+inline string getDateStringAlt(const boost::local_time::local_date_time& ldt) { return getLocalDateTimeString(ldt, "%a %b %d %Y"); };
 
 boost::posix_time::ptime getFromWindows64(int64_t t);
 inline boost::posix_time::ptime getFromWindows64Big(int64_t t) { return getFromWindows64(bigToHost64(t)); };
